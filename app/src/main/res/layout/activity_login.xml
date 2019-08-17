@@ -2,50 +2,75 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#B1CFD1"
+    android:backgroundTint="#B1CFD1"
     android:fitsSystemWindows="true">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="56dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
 
-        <ImageView
-            android:layout_width="312dp"
-            android:layout_height="247dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/logo" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="336dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/logo" />
 
-        <!--  Email Label -->
-
-        <!--  Password Label -->
-        <EditText
-            android:id="@+id/editText"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:ems="10"
-            android:hint="Email "
-            android:inputType="textEmailAddress" />
+            app:helperText="@string/required"
+            app:errorEnabled="true"
+            android:layout_marginTop="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:id="@+id/editText2"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:hint="@string/email">
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword" />
+            android:layout_marginTop="20dp"
+            app:helperText="@string/required"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorAccent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:text="Login" />
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:onClick="onClick"
+            android:text="@string/login"
+            android:textColor="#09595E"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/link_signup"
@@ -53,8 +78,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="48dp"
             android:gravity="center"
-            android:text="No account yet? Create one"
+            android:text="@string/no_account_yet_create_one"
             android:textSize="16dip" />
 
+
     </LinearLayout>
+
 </ScrollView>
