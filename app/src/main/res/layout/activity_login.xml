@@ -4,7 +4,6 @@
     android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#B1CFD1"
-    android:backgroundTint="#B1CFD1"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -32,10 +31,11 @@
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:singleLine="true"
-                android:hint="@string/email">
-            </com.google.android.material.textfield.TextInputEditText>
+                android:singleLine="true"></com.google.android.material.textfield.TextInputEditText>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,6 +53,8 @@
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:singleLine="true" />
@@ -66,7 +68,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#57D3DF"
             android:onClick="onClick"
             android:text="@string/login"
             android:textColor="#09595E"
