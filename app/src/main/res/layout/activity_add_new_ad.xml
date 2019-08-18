@@ -14,7 +14,7 @@
                         app:srcCompat="@drawable/dummyimage"/>
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtName"
+                        android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
                         android:layout_marginTop="5dp"
