@@ -6,11 +6,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import com.codeblack.movealong.Utilities.Utility;
+import com.codeblack.movealong.Utilities.Validations;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,77 +29,145 @@ import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
 
+    AppCompatActivity activity = SignupActivity.this;
+
+    private EditText name;
+    private EditText address;
+    private EditText email;
+    private EditText phone;
+    private EditText password;
+    private EditText re_Enter_Password;
+
+    private Button btn_register;
+    private TextView text_login;
+
+    FirebaseAuth auth;
+    FirebaseFirestore dRef = FirebaseFirestore.getInstance();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        initView();
+
+        text_login.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent mIntent = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(mIntent);
+                finish();
+            }
+        });
+
+        btn_register.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                create_User();
+            }
+        });
+
+        auth = FirebaseAuth.getInstance();
+        initView();
+
     }
+
+
+    private void initView()
+    {
+        name = ((EditText)findViewById(R.id.input_name));
+        address = ((EditText)findViewById(R.id.input_address));
+        email = (EditText)findViewById(R.id.input_email);
+        phone = (EditText)findViewById(R.id.input_mobile);
+        password = (EditText)findViewById(R.id.input_password);
+        re_Enter_Password = (EditText)findViewById(R.id.input_reEnterPassword);
+        btn_register = (Button)findViewById(R.id.btn_signup);
+        text_login = (TextView)findViewById(R.id.link_login);
+    }
+
+
+    private void create_User() {
+        if(validate_Sign_Up_Data()){
+
+            auth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                addDataToFireStore();
+//                              FirebaseUser user = auth.getCurrentUser();
+//                              updateUI(user);
+                            } else {
+                                System.out.println("user not created");
+                            }
+                        }
+                    });
+        }
+      }
+
+
+    private void addDataToFireStore() {
+
+        String uId = auth.getUid();
+
+        Map<String, Object> userMap = new HashMap<>();
+
+        userMap.put("email", email.getText().toString());
+        userMap.put("name", name.getText().toString());
+        userMap.put("password", password.getText().toString());
+        userMap.put("address", address.getText().toString());
+        userMap.put("phone", phone.getText().toString());
+
+        DocumentReference newCityRef = dRef.collection("users").document(uId);
+        newCityRef.set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+                startActivity(new Intent(activity, LoginActivity.class));
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println("failure"+ e.getMessage());
+            }
+        });
+    }
+
+    private boolean validate_Sign_Up_Data(){
+
+        if (name.getText().toString().isEmpty()){
+            Utility.utility_Toast(getApplicationContext() ,"Please Enter Your Name");
+            return false;
+
+        }else if (address.getText().toString().isEmpty()){
+            Utility.utility_Toast(getApplicationContext() ,"Please Enter Address");
+            return false;
+        }else if (email.getText().toString().isEmpty()){
+            Utility.utility_Toast(getApplicationContext() ,"Please Enter Email ID");
+            return false;
+        }else if (!(Validations.is_Email_Valid(email.getText().toString()))){
+            Utility.utility_Toast(getApplicationContext() ,"Please Enter Valid Email");
+            return false;
+        }else if (password.getText().toString().isEmpty()){
+            Utility.utility_Toast(getApplicationContext() ,"Please Enter password");
+            return false;
+        }else if (re_Enter_Password.getText().toString().isEmpty()){
+            Utility.utility_Toast(getApplicationContext() ,"Please re-Enter Password");
+            return false;
+        }else if (!Validations.isValidPassword(password.getText().toString())){
+            Utility.utility_Toast(getApplicationContext() ,"Please Enter valid password");
+            return false;
+        }else if (!(password.getText().toString()).equals(re_Enter_Password.getText().toString())){
+            Utility.utility_Toast(getApplicationContext() ,"Confirm password did not match");
+            return false;
+        }
+
+        return true;
+    }
+
+
 }
-
-
-//
-//    private void createUser() {
-//
-//        auth.createUserWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
-//                .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        Log.e(TAG, "onComplete: "+task.isSuccessful() );
-//                        // If sign in fails, display a message to the user. If sign in succeeds
-//                        // the auth state listener will be notified and logic to handle the
-//                        // signed in user can be handled in the listener.
-//                        if (!task.isSuccessful()) {
-//                            printToast(activity,"Authentication failed." + task.getException());
-//
-//                        } else {
-//                            addDataToFireStone();
-//                        }
-//                    }
-//                });
-//    }
-//
-//    private void addDataToFireStone() {
-//
-//        String userId = auth.getUid();
-//
-//        Map<String,Object> userMap = new HashMap<>();
-//        userMap.put("userId",userId);
-//        userMap.put("email",etEmail.getText().toString());
-//        userMap.put("firstName", etFirstName.getText().toString());
-//        userMap.put("lastName",etLastName.getText().toString());
-//        userMap.put("password",etPassword.getText().toString());
-//
-//        DocumentReference newCityRef = dRef.collection("users").document(userId);
-//        newCityRef.set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-//            @Override
-//            public void onSuccess(Void aVoid) {
-//                ShareSmilesPrefs.writeBool(activity,ShareSmilesPrefs.isLogin,true);
-//                ShareSmilesPrefs.writeString(activity,ShareSmilesPrefs.emailId,etEmail.getText().toString());
-//                ShareSmilesPrefs.writeString(activity,ShareSmilesPrefs.userName,etFirstName.getText().toString()+" "+etLastName.getText().toString());
-//                ShareSmilesPrefs.writeString(activity,ShareSmilesPrefs.userId,userId);
-//                ShareSmilesPrefs.writeString(activity,ShareSmilesPrefs.userPic,"");
-//
-//                startActivity(new Intent(activity,MainActivity.class));
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Log.e(TAG, "failure: " +e.getMessage());
-//            }
-//        });
-//       /* dRef.collection("users")
-//                .add(userMap).addOnSuccessListener(new OnSuccessListener< Void >() {
-//            @Override
-//            public void onSuccess(Void aVoid) {
-//                printToast(activity,"Data Added");
-//
-//                Log.e(TAG, "onSuccess: " );
-//            }
-//        })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.e("TAG", e.toString());
-//                    }
-//                });*/
-//    }

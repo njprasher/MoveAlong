@@ -12,9 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
+
     private Button btnLogin;
+
     private EditText edtUserName;
     private EditText edtPassword;
+
+    private TextView text_register;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        text_register.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent mIntent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(mIntent);
+                finish();
+            }
+        });
+
     }
 
     private void initView()
@@ -53,6 +68,9 @@ public class LoginActivity extends AppCompatActivity {
         edtUserName = (EditText)findViewById(R.id.edtEmail);
         edtPassword = (EditText)findViewById(R.id.edtPassword);
         btnLogin = (Button)findViewById(R.id.btnLogin);
+
+        text_register= (TextView)findViewById(R.id.link_signup);
+
     }
 
 
