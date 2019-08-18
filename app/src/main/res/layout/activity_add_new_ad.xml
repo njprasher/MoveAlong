@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:chip="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/uploadimage"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        app:srcCompat="@drawable/dummyimage"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_marginTop="5dp"
+                        android:hint="Title for Ad Listing"
+                        android:maxLines="1"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:singleLine="true"
+                        android:textSize="13sp"
+                        android:typeface="serif" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/place"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:hint="Place"
+                        android:maxLines="5"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:singleLine="true"
+                        android:textSize="13sp"
+                        android:typeface="serif" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/timetomove"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:hint="Time to move"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:singleLine="true"
+                        android:textSize="13sp"
+                        android:typeface="serif" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/budget"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="Budget"
+                        android:onClick="onClick"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:textSize="13sp"
+                        android:typeface="serif" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/numberofpersons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:hint="Number of Persons"
+                        android:inputType="textMultiLine|textCapWords|textNoSuggestions"
+
+                        android:minHeight="?attr/actionBarSize"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:textSize="13sp"
+                        android:typeface="serif" />
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/prefer"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="Preferably Looking For??"
+                        android:onClick="onClick"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:textSize="13sp"
+                        android:typeface="serif"
+                        android:visibility="gone" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/details"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="Ad Details"
+                        android:onClick="onClick"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:textSize="13sp"
+                        android:typeface="serif" />
+
+    <Button
+        android:id="@+id/btnSubmitAd"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_vertical"
+        android:onClick="onClick"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:text="Submit"
+        android:textAlignment="center"
+        android:textSize="13sp"
+        android:typeface="serif" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

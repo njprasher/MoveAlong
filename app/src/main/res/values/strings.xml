@@ -9,4 +9,9 @@
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="one">ONE</string>
+    <string name="four">FOUR</string>
+    <string name="three">THREE</string>
+    <string name="two">TWO</string>
 </resources>

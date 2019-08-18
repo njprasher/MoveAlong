@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_appicon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AddNewAdActivity"></activity>
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/Theme.Design.NoActionBar"></activity>
-
+            android:theme="@style/Theme.Design.NoActionBar" />
         <activity android:name=".SignupActivity" />
         <activity
             android:name=".SplashScreen"
@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
+        <activity android:name=".TabViewActivity" />
     </application>
 
 </manifest>
