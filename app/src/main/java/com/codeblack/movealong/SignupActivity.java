@@ -41,7 +41,7 @@ public class SignupActivity extends AppCompatActivity {
     private Button btn_register;
     private TextView text_login;
 
-    FirebaseAuth auth;
+    FirebaseAuth mAuth;
     FirebaseFirestore dRef = FirebaseFirestore.getInstance();
 
     @Override
@@ -71,7 +71,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        auth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         initView();
 
     }
@@ -93,13 +93,13 @@ public class SignupActivity extends AppCompatActivity {
     private void create_User() {
         if(validate_Sign_Up_Data()){
 
-            auth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+            mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 addDataToFireStore();
-//                              FirebaseUser user = auth.getCurrentUser();
+//                              FirebaseUser user = mAuth.getCurrentUser();
 //                              updateUI(user);
                             } else {
                                 System.out.println("user not created");
@@ -112,7 +112,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private void addDataToFireStore() {
 
-        String uId = auth.getUid();
+        String uId = mAuth.getUid();
 
         Map<String, Object> userMap = new HashMap<>();
 
@@ -122,8 +122,8 @@ public class SignupActivity extends AppCompatActivity {
         userMap.put("address", address.getText().toString());
         userMap.put("phone", phone.getText().toString());
 
-        DocumentReference newCityRef = dRef.collection("users").document(uId);
-        newCityRef.set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+        DocumentReference newUsersRef = dRef.collection("users").document(uId);
+        newUsersRef.set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 

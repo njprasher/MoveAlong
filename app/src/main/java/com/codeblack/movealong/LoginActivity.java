@@ -1,5 +1,6 @@
 package com.codeblack.movealong;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -11,6 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codeblack.movealong.Utilities.Utility;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class LoginActivity extends AppCompatActivity {
 
     private Button btnLogin;
@@ -19,14 +27,14 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtPassword;
 
     private TextView text_register;
+    FirebaseAuth mAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        initView();
         Users u1 = new Users("raj@gmail.com" ,"123456");
         Users u2 = new Users("neeraj@gmail.com" ,"123456");
         Users u3 = new Users("uday@gmail.com" ,"123456");
@@ -38,8 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         Users.userArray.add(u3);
         Users.userArray.add(u4);
         Users.userArray.add(u5);
-
-        initView();
 
         btnLogin.setOnClickListener(new View.OnClickListener()
         {
@@ -60,6 +66,9 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        mAuth = FirebaseAuth.getInstance();
+        initView();
 
     }
 
@@ -84,32 +93,41 @@ public class LoginActivity extends AppCompatActivity {
 
         if(userName.isEmpty() || userName.trim().length() == 0)
         {
-            edtUserName.setError("Enter Email ID");
+            Utility.utility_Toast(LoginActivity.this , "Enter Email ID");
             return;
         }else if (password.isEmpty() || password.trim().length() == 0){
-            edtPassword.setError("Enter Password");
+            Utility.utility_Toast(LoginActivity.this , "Enter Password");
         }else{
-            for( int i =0 ; i < Users.userArray.size() ; i++){
-                if (Users.userArray.get(i).Email.equals(userName) && Users.userArray.get(i).Password.equals(password)){
-                    Intent mIntent = new Intent(LoginActivity.this, HomeActivity.class);
 
-                    startActivity(mIntent);
-                    finish();
-                }else{
-                    temp = temp+1;
-                }
-            }
+                mAuth.signInWithEmailAndPassword(userName, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+//                                    Log.d(TAG, "signInWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    Utility.utility_Toast(LoginActivity.this, "Auth");
 
-            if(temp == Users.userArray.size()){
-                Toast.makeText(getApplicationContext(),"UserName or Password is wrong",Toast.LENGTH_SHORT).show();
+                                    Intent mIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                                    startActivity(mIntent);
+                                    finish();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+//                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                    Utility.utility_Toast(LoginActivity.this, "Authentication failed.");
+                                }
+
+                                // ...
+                            }
+                        });
+
             }
 
         }
 
     }
 
-
-}
 
 
 
