@@ -11,10 +11,12 @@ import androidx.fragment.app.Fragment;
 import com.codeblack.movealong.AddNewAdActivity;
 import com.codeblack.movealong.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-public class TwoFragment extends Fragment {
+public class TwoFragment extends Fragment  {
 
     FloatingActionButton addProduct;
+    private FirebaseFirestore dRef = FirebaseFirestore.getInstance();
 
     public TwoFragment() {
         // Required empty public constructor
@@ -22,14 +24,13 @@ public class TwoFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View mView = inflater.inflate(R.layout.fragment_two, container, false);
         addProduct = mView.findViewById(R.id.addProduct);
@@ -43,9 +44,8 @@ public class TwoFragment extends Fragment {
                 startActivity(mIntent);
             }
         });
-
-
         return mView;
     }
+
 
 }
