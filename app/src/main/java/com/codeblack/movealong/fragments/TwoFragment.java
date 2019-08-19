@@ -91,7 +91,6 @@ public class TwoFragment extends Fragment  {
         dbref.collection("properties").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                int arr_Size = 1;
                 for (DocumentChange documentChange : documentSnapshots.getDocumentChanges()) {
 //                    if(!documentChange.getDocument().getData().isEmpty()) {
                         title = documentChange.getDocument().getData().get("title").toString();
