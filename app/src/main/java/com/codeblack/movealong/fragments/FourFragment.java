@@ -4,10 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.fragment.app.Fragment;
+
 import com.codeblack.movealong.R;
 
+import io.opencensus.metrics.LabelValue;
+
 public class FourFragment extends Fragment {
+
+    private LabelValue name ;
+    private LabelValue address;
+    private LabelValue email;
+    private LabelValue phone;
 
     public FourFragment() {
         // Required empty public constructor

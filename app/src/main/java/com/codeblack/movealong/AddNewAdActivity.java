@@ -28,7 +28,7 @@ public class AddNewAdActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore dRef = FirebaseFirestore.getInstance();
 
-    private EditText place;
+    private EditText address;
     private EditText timetomove;
     private EditText prefer;
     private EditText details;
@@ -69,7 +69,7 @@ public class AddNewAdActivity extends AppCompatActivity {
     public void initView(){
 
         title = (EditText)findViewById(R.id.title);
-        place = (EditText)findViewById(R.id.place);
+        address = (EditText)findViewById(R.id.address);
         timetomove = (EditText)findViewById(R.id.timetomove);
         budget = (EditText)findViewById(R.id.budget);
         numberofpersons = (EditText)findViewById(R.id.numberofpersons);
@@ -90,14 +90,16 @@ public class AddNewAdActivity extends AppCompatActivity {
 
         HashMap<String, Object> propertyMap = new HashMap<>();
             propertyMap.put("aId", ++add_id);
-            propertyMap.put("title", title.getText().toString());
             propertyMap.put("uId", userId);
-            propertyMap.put("place", place.getText().toString());
+            propertyMap.put("is_active", 0);
+            propertyMap.put("title", title.getText().toString());
+            propertyMap.put("address", address.getText().toString());
             propertyMap.put("timetomove", timetomove.getText().toString());
+            propertyMap.put("Budget", budget.getText().toString());
+            propertyMap.put("numberofpersons", numberofpersons.getText().toString());
             propertyMap.put("prefer", prefer.getText().toString());
             propertyMap.put("details", details.getText().toString());
-            propertyMap.put("is_active", 0);
-            propertyMap.put("address", "");
+
 //            propertyMap.put("itemImage", path);
 
         //        CollectionReference userRef = dRef.collection("users").document(userId).collection("products");

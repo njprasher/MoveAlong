@@ -27,12 +27,12 @@
                         android:typeface="serif" />
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/place"
+                        android:id="@+id/address"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
-                        android:hint="Place"
+                        android:hint="Address"
                         android:maxLines="5"
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
@@ -47,7 +47,6 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:hint="Time to move"
-                        android:inputType="numberDecimal"
                         android:maxLines="1"
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
@@ -71,22 +70,6 @@
                         android:typeface="serif" />
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/numberofpersons"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:hint="Number of Persons"
-                        android:inputType="textMultiLine|textCapWords|textNoSuggestions"
-
-                        android:minHeight="?attr/actionBarSize"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp"
-                        android:textSize="13sp"
-                        android:typeface="serif" />
-
-
-                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/prefer"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
@@ -98,8 +81,20 @@
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
                         android:textSize="13sp"
-                        android:typeface="serif"
-                        android:visibility="gone" />
+                        android:typeface="serif" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/numberofpersons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:hint="Number of Persons"
+                        android:minHeight="?attr/actionBarSize"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:textSize="13sp"
+                        android:typeface="serif" />
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/details"
@@ -108,7 +103,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_vertical"
-                        android:hint="Ad Details"
+                        android:hint="Further Ad Details"
                         android:onClick="onClick"
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
