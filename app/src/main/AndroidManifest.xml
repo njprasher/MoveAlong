@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.codeblack.movealong">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -14,7 +17,8 @@
         android:roundIcon="@mipmap/ic_appicon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyWebView"></activity>
+        <activity android:name=".MyContactActivity"></activity>
+        <activity android:name=".MyWebView" />
         <activity android:name=".AddNewAdActivity" />
         <activity
             android:name=".HomeActivity"
@@ -33,7 +37,6 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".TabViewActivity" />
-
     </application>
 
 </manifest>
